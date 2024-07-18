@@ -11,12 +11,12 @@ window.onload = () => {
   });
 };
 
-let index = 0
+let index = 0;
 
 function searchCountry() {
-  const input = document.getElementById("countryInput")
+  const input = document.getElementById("countryInput");
   const countryName = input.value;
-  input.value = ""
+  input.value = "";
   if (!countryName) {
     alert("Enter a country");
     return;
@@ -43,10 +43,10 @@ function searchCountry() {
 
 function displayCountryInfo(country) {
   const countryInfo = document.createElement("div");
-  const countryName = (country.name.common)
-  const countryCapitals = getCountryCapitals(country)
-  countryInfo.id = countryName.replace(/\s/g, '');
-  countryInfo.classList = "country"
+  const countryName = country.name.common;
+  const countryCapitals = getCountryCapitals(country);
+  countryInfo.id = countryName.replace(/\s/g, "");
+  countryInfo.classList = "country";
   countryInfo.innerHTML = `
   <ul>
       <li>
@@ -57,6 +57,7 @@ function displayCountryInfo(country) {
           </img>
       </li>
       <li><span>Capital: </span>${countryCapitals}</li>
+      <li><span>Region: </span>${country.region}</li>
       <li><span>Population: </span>${country.population.toLocaleString()}</li>
       <li>
       <button
@@ -70,26 +71,22 @@ function displayCountryInfo(country) {
   document.getElementById("countryList").appendChild(countryInfo);
 }
 
-function getCountryCapitals(country){
+function getCountryCapitals(country) {
   const capitalList = country.capital;
-  if(capitalList.lenght == 1){
+  if (capitalList.lenght == 1) {
     return capitalList[0];
   }
   let capitalsString = "";
-  capitalList.forEach(element => {
-    if(capitalList.at(-1) == element)
-      capitalsString+=`${element}`;
-    else
-      capitalsString += `${element}, `;
+  capitalList.forEach((element) => {
+    if (capitalList.at(-1) == element) capitalsString += `${element}`;
+    else capitalsString += `${element}, `;
   });
   return capitalsString;
-
-
 }
 
-function removeAllCountries(){
+function removeAllCountries() {
   document.getElementById("countryList").innerHTML = "";
-  setStorageItems([])
+  setStorageItems([]);
 }
 
 function removeCountry(obj) {
@@ -100,7 +97,7 @@ function removeCountry(obj) {
 function removeCountryFromStorage(id) {
   const list = getStorageItems();
   for (element of list) {
-    if ((element.name.common).replace(/\s/g, '') == id) {
+    if (element.name.common.replace(/\s/g, "") == id) {
       list.splice(list.indexOf(element), 1);
       setStorageItems(list);
       return true;
