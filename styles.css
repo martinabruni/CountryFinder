@@ -61,3 +61,9 @@ img {
 span {
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  #container {
+    width: 80%;
+  }
+}
